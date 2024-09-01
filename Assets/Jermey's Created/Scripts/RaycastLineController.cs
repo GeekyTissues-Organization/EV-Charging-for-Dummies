@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class RayInteractorLineController : MonoBehaviour
 {
@@ -8,16 +8,13 @@ public class RayInteractorLineController : MonoBehaviour
 
     void Update()
     {
-        // Cast the ray
         if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
         {
-            // Set the start and end positions of the line
-            lineRenderer.SetPosition(0, rayInteractor.transform.position); // Controller position
-            lineRenderer.SetPosition(1, hit.point); // Point where the ray hits
+            lineRenderer.SetPosition(0, rayInteractor.transform.position); 
+            lineRenderer.SetPosition(1, hit.point);
         }
         else
         {
-            // If nothing is hit, extend the ray to its max length
             lineRenderer.SetPosition(0, rayInteractor.transform.position);
             lineRenderer.SetPosition(1, rayInteractor.transform.position + rayInteractor.transform.forward * rayInteractor.maxRaycastDistance);
         }
